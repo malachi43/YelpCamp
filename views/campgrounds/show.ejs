@@ -2,12 +2,15 @@
 <% layout('layout/boilerplate') -%>
 <div class="container my-5">
   <div class="row mb-3 justify-content-center">
-    <div class="col-6">
+    <div class="col-4">
+      <p class="lead"><%= campground.location %></p>
       <div
         id="map"
         style="width: 400px; height: 300px"
         class="my-3 rounded mx-auto"
       ></div>
+    </div>
+    <div class="col-4">
       <div class="card">
         <div id="imageCarousel" class="carousel slide" data-bs-ride="carousel">
           <div class="carousel-inner">
@@ -77,9 +80,9 @@
       </div>
     </div>
     <% if(currentUser) {%>
-    <div class="col-6">
-      <div class="m-3">
-        <h4 class="h-4">Leave a Review</h4>
+    <div class="col-4">
+      <div class="m-3 mt-0">
+        <p class="lead">Leave a Review</p>
         <form
           action="/campgrounds/<%= campground._id %>/reviews"
           method="POST"
@@ -182,7 +185,9 @@
 </div>
 
 <script>
+  const campground = <%- JSON.stringify(campground)%>
   const mapToken = "<%- process.env.MAPBOX_TOKEN %>";
-  const coordinates = <%- JSON.stringify(campground.geometry.coordinates) %>
+  const coordinates = "<%- JSON.stringify(campground.geometry.coordinates) %>";
+  const popUpText = "<%- campground.description %>";
 </script>
 <script src="/javascripts/renderMap.js"></script>

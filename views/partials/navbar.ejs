@@ -14,7 +14,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav mx-auto">
+      <ul id="options" class="navbar-nav mx-auto">
         <li class="nav-item">
           <a class="nav-link mx-2" aria-current="page" href="/">Home</a>
         </li>
@@ -25,20 +25,7 @@
           <a class="nav-link mx-2" href="/campgrounds/new">New Campground</a>
         </li>
       </ul>
-      <ul class="mx-auto my-auto">
-        <form action="/campgrounds" class="d-flex" method="get">
-          <input
-            class="form-control lead me-2 rounded"
-            type="search"
-            placeholder="Search campgrounds"
-            aria-label="Search"
-            name="q"
-          />
-          <button class="btn btn-outline-info rounded text-white" type="submit">Search</button>
-        </form>
-      </ul>
-
-      <ul class="navbar-nav ms-auto">
+      <ul  id="personal" class="navbar-nav ms-auto">
         <% if(currentUser) {%>
         <li class="nav-item">
           <p class="nav-link text-white">
