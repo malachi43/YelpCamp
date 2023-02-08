@@ -1,0 +1,45 @@
+<% layout('layout/boilerplate') -%>
+
+<div class="container my-5 bg-dark rounded border-danger border-3 border">
+  <% if(campgrounds[0]) {%> <% for(let image of campgrounds[0].images){ %>
+  <div class="row justify-content-center my-5 ">
+    <div class="col-2 m-4">
+      <form
+        action="/campgrounds/image/<%= image._id %>?_method=DELETE"
+        method="post"
+      >
+        <img src="<%= image.path %>" alt="" class="img-thumbnail img-fluid" />
+        <button class="btn btn-sm btn-danger my-2">Delete</button>
+      </form>
+    </div>
+    <div class="col-2 m-4">
+      <form
+        action="/campgrounds/image/<%= image._id %>?_method=DELETE"
+        method="post"
+      >
+        <img src="<%= image.path %>" alt="" class="img-thumbnail img-fluid" />
+        <button class="btn btn-sm btn-danger my-2">Delete</button>
+      </form>
+    </div>
+    <div class="col-2 m-4">
+      <form
+        action="/campgrounds/image/<%= image._id %>?_method=DELETE"
+        method="post"
+      >
+        <img src="<%= image.path %>" alt="" class="img-thumbnail img-fluid" />
+        <button class="btn btn-sm btn-danger my-2">Delete</button>
+      </form>
+    </div>
+    <div class="col-2 m-4">
+      <form
+        action="/campgrounds/image/<%= image._id %>?_method=DELETE"
+        method="post"
+      >
+        <img src="<%= image.path %>" alt="" class="img-thumbnail img-fluid" />
+        <button class="btn btn-sm btn-danger my-2">Delete</button>
+      </form>
+    </div>
+  </div>
+
+<% } %> <% } %>
+</div>

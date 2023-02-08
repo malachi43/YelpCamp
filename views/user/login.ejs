@@ -1,0 +1,38 @@
+<% layout('layout/boilerplate') -%>
+
+<div class="container">
+  <div class="row justify-content-center my-5">
+    <div class="col-6">
+      <h1 class="display-3 lead text-center">Login</h1>
+
+      <form action="/auth/login" class="validate-form" method="post" novalidate>
+        <div class="lead my-3 has-validation">
+          <label for="username" class="form-label">Enter username:</label>
+          <input
+            type="text"
+            name="username"
+            class="form-control"
+            id="username"
+            placeholder="username"
+            required
+          />
+          <div class="invalid-feedback">Field cannot be empty</div>
+        </div>
+        <div class="lead my-3 has-validation">
+          <label for="password" class="form-label">Enter password:</label>
+          <input
+            type="password"
+            name="password"
+            class="form-control validate-form"
+            id="password"
+            placeholder="password"
+            required
+          />
+          <div class="invalid-feedback">Field cannot be empty</div>
+        </div>
+
+        <button class="btn btn-outline-success">Login</button>
+      </form>
+    </div>
+  </div>
+</div>

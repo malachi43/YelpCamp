@@ -1,0 +1,87 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="/node_modules/bootstrap/dist/css/bootstrap.min.css"
+    />
+    <title>Working with BootStrap</title>
+    <style></style>
+  </head>
+  <body>
+    <h1 class="text-center my-5">Working with Bootstrap</h1>
+
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="form col-8 p-3">
+          <form action="">
+            <label for="username" class="form-label">Username:</label>
+            <input
+              type="text"
+              name="username"
+              class="form-control"
+              placeholder="Enter username"
+            />
+          </form>
+        </div>
+        <div class="form col-4 p-3">
+          <form action="">
+            <label for="password" class="form-label">Password:</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Enter password"
+              name="password"
+            />
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <button class="btn btn-primary btn-lg" disabled>Large Button</button>
+      <button class="btn btn-primary btn-sm">Small Button</button>
+      <button class="btn btn-primary btn">Regular Button</button>
+    </div>
+
+    <div class="container my-5">
+      <div class="row justify-content-center align-items-center gy-3">
+        <div class="col-md-5">
+          <div class="card border-info text-muted lead">
+            <div class="card-body">
+              <h5 class="card-title">Title</h5>
+              <h6 class="card-subtitle mb-2 text-muted">
+                Sub-heading
+              </h6>
+              <p class="card-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Velit, laborum laboriosam rerum debitis numquam rem itaque, architecto maxime eligendi at aliquam nulla eos ab doloremque cumque quibusdam est voluptatem! Doloribus, sapiente impedit iusto eligendi eveniet, adipisci iste, quidem obcaecati quae provident reiciendis qui accusantium sed dolor laudantium! Eligendi, laboriosam amet.</p>
+              <a
+                href="/campgrounds/<%= campground._id%>"
+                class="btn btn-primary"
+                >View details
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-7">
+            <div class="card border-info text-muted lead">
+                <div class="card-body">
+                  <h5 class="card-title">Title</h5>
+                  <h6 class="card-subtitle mb-2 text-muted">
+                   Sub-heading
+                  </h6>
+                  <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit, minus impedit dicta earum vero neque aliquam iusto ullam, laborum sunt aut. Saepe consequuntur rerum at ipsum adipisci, temporibus asperiores ipsam.</p>
+                  <a
+                    href="/campgrounds/<%= campground._id%>"
+                    class="btn btn-primary"
+                    >View details
+                  </a>
+                </div>
+              </div>
+      </div>
+      </div>
+    </div>
+    <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+  </body>
+</html>
