@@ -5,9 +5,12 @@
       <div class="lead vh-100 my-5">
         <div class="alert alert-danger shadow-lg" role="alert">
           <h4 class="alert-heading display-3">Error</h4>
-          <p><%= err %></p>
+          <p> <%= err.message %></p>
+          <% if(process.env.NODE_ENV !== 'production') {%>
+          <p><%= err.stack %></p>
           <hr />
           <p class="mb-0 display-3"><%= errorCode %></p>
+          <% } %>
         </div>
       </div>
     </div>

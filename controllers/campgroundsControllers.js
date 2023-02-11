@@ -13,7 +13,10 @@ module.exports.getAllCampgrounds = async (req, res) => {
 }
 
 module.exports.updateCampground = async (req, res) => {
+
     const campground = await Campground.findByIdAndUpdate(req.params.id, { ...req.body.campground }, { runValidators: true, new: true })
+
+    
     if (req.files) {
         const images = req.files.map(file => ({ path: file.path, filename: file.filename }))
         campground.images.push(...images)
@@ -53,6 +56,7 @@ module.exports.createCampground = async (req, res) => {
     const geometry = features[0].geometry
 
     const images = req.files.map(file => {
+        console.log(file.path)
         return {
             path: file.path,
             filename: file.filename
@@ -84,3 +88,6 @@ module.exports.deleteCampground = async (req, res) => {
     req.flash('success', 'successfully deleted campground')
     res.redirect('/campgrounds')
 }
+
+
+

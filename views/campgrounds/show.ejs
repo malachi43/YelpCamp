@@ -2,15 +2,7 @@
 <% layout('layout/boilerplate') -%>
 <div class="container my-5">
   <div class="row mb-3 justify-content-center">
-    <div class="col-4">
-      <p class="lead"><%= campground.location %></p>
-      <div
-        id="map"
-        style="width: 400px; height: 300px"
-        class="my-3 rounded mx-auto"
-      ></div>
-    </div>
-    <div class="col-4">
+    <div class="col-md-6 mx-auto">
       <div class="card">
         <div id="imageCarousel" class="carousel slide" data-bs-ride="carousel">
           <div class="carousel-inner">
@@ -71,7 +63,6 @@
           >
             <button class="btn btn-danger">Delete</button>
           </form>
-          <a class="btn btn-info" href="/campgrounds/images">manage images</a>
         </div>
 
         <% } %>
@@ -80,8 +71,18 @@
       </div>
     </div>
     <% if(currentUser) {%>
-    <div class="col-4">
-      <div class="m-3 mt-0">
+    <div class="col-6 mx-auto">
+      <div class="m-3 d-none d-md-block">
+        <p class="lead">
+          <i class="bi bi-geo-fill"></i><%= campground.location %>
+        </p>
+        <div
+          id="map"
+          style="width: 100%; height: 300px"
+          class="my-3 rounded mx-auto d-none d-md-block"
+        ></div>
+      </div>
+      <div class="m-3 d-none d-md-block mt-0">
         <p class="lead">Leave a Review</p>
         <form
           action="/campgrounds/<%= campground._id %>/reviews"
@@ -154,11 +155,11 @@
           <button class="btn btn-success mt-3">Submit</button>
         </form>
       </div>
-      <div class="lead">
+      <div class="lead d-none d-md-block">
         <p class="display-5">Reviews</p>
         <% if(campground && campground.reviews.length){%> <% for(let review of
         campground.reviews) { %>
-        <div class="lead m-2 p-3 border border-dark shadow">
+        <div class="lead m-2 p-3 border fs-6 border-dark shadow">
           <p class="starability-result mb-1" data-rating="<%= review.rating%>">
             Rated:<%= review.rating%> stars
           </p>
@@ -185,7 +186,7 @@
 </div>
 
 <script>
-  const campground = <%- JSON.stringify(campground)%>
+  const campground = <%- JSON.stringify(campground) %>
   const mapToken = "<%- process.env.MAPBOX_TOKEN %>";
   const coordinates = "<%- JSON.stringify(campground.geometry.coordinates) %>";
   const popUpText = "<%- campground.description %>";

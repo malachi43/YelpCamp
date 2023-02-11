@@ -1,7 +1,6 @@
-<nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark">
-  <div class="container-fluid">
-    <a href="/"> <i class="bi bi-house-door text-white mx-2"></i></a>
-    <a class="navbar-brand fw-bold" href="/">YelpCamp</a>
+<nav class="navbar navbar-expand-lg sticky-top bg-dark navbar-light ">
+  <div id="homeIcon" class="container-fluid">
+    <a class="navbar-brand fw-bold text-white" href="/">YelpCamp</a>
     <button
       class="navbar-toggler"
       type="button"
@@ -14,34 +13,35 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul id="options" class="navbar-nav mx-auto">
+      <ul id="options" class="navbar-nav ">
         <li class="nav-item">
-          <a class="nav-link mx-2" aria-current="page" href="/">Home</a>
+          <a  id="home" class="nav-link mx-2" aria-current="page" href="/"><i class="bi fs-5 text-dark bi-houses-fill text-white"></i></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link mx-2" href="/campgrounds">Campgrounds</a>
+          <a class="nav-link mx-2 text-white text-white" href="/campgrounds">Campgrounds</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link mx-2" href="/campgrounds/new">New Campground</a>
+          <a class="nav-link mx-2 text-white" href="/campgrounds/new">New Campground</a>
         </li>
+       
       </ul>
-      <ul  id="personal" class="navbar-nav ms-auto">
+      <ul id="personal" class="navbar-nav ms-auto">
         <% if(currentUser) {%>
         <li class="nav-item">
-          <p class="nav-link text-white">
+          <p class="nav-link text-dark mx-2 text-white">
             Welcome, <%= currentUser.username %>
           </p>
         </li>
         <li class="nav-item">
-          <a href="/auth/logout" class="nav-link">Logout</a>
+          <a href="/auth/logout" class="nav-link text-white mx-2">Logout</a>
         </li>
         <% } else{%>
         <li class="nav-item">
-          <a href="/auth/login" class="nav-link">Login</a>
+          <a href="/auth/login" class="nav-link text-white mx-2">Login</a>
         </li>
 
         <li class="nav-item">
-          <a href="/auth/register" class="nav-link">Signup</a>
+          <a href="/auth/register" class="nav-link text-white mx-2">Signup</a>
         </li>
         <% } %>
       </ul>

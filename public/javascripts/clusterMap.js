@@ -9,14 +9,15 @@ const map = new mapboxgl.Map({
 });
 
 map.on('load', () => {
+
+    map.addControl(new mapboxgl.NavigationControl());
     // Add a new source from our GeoJSON data and
     // set the 'cluster' option to true. GL-JS will
     // add the point_count property to your source data.
-    map.addSource('earthquakes', {
+    map.addSource('campgrounds', {
         type: 'geojson',
-        // Point to GeoJSON data. This example visualizes all M1.0+ earthquakes
-        // from 12/22/15 to 1/21/16 as logged by USGS' Earthquake hazards program.
-        data: 'https://docs.mapbox.com/mapbox-gl-js/assets/earthquakes.geojson',
+        // Point to GeoJSON data. This example visualizes all campgrounds
+        data: data,
         cluster: true,
         clusterMaxZoom: 14, // Max zoom to cluster points on
         clusterRadius: 50 // Radius of each cluster when clustering points (defaults to 50)
@@ -25,21 +26,21 @@ map.on('load', () => {
     map.addLayer({
         id: 'clusters',
         type: 'circle',
-        source: 'earthquakes',
+        source: 'campgrounds',
         filter: ['has', 'point_count'],
         paint: {
             // Use step expressions (https://docs.mapbox.com/mapbox-gl-js/style-spec/#expressions-step)
             // with three steps to implement three types of circles:
-            //   * Blue, 20px circles when point count is less than 100
-            //   * Yellow, 30px circles when point count is between 100 and 750
-            //   * Pink, 40px circles when point count is greater than or equal to 750
+            //   * #A5D6A7 colour , 20px circles when point count is less than 10
+            //   * #FFAB91 colour, 30px circles when point count is between 10 and 20
+            //   * #f28cb1 colour, 40px circles when point count is greater than or equal to 20
             'circle-color': [
                 'step',
                 ['get', 'point_count'],
-                '#51bbd6',
-                100,
-                '#f1f075',
-                750,
+                '#A5D6A7',
+                10,
+                '#FFAB91',
+                20,
                 '#f28cb1'
             ],
             'circle-radius': [
@@ -57,7 +58,7 @@ map.on('load', () => {
     map.addLayer({
         id: 'cluster-count',
         type: 'symbol',
-        source: 'earthquakes',
+        source: 'campgrounds',
         filter: ['has', 'point_count'],
         layout: {
             'text-field': ['get', 'point_count_abbreviated'],
@@ -69,7 +70,7 @@ map.on('load', () => {
     map.addLayer({
         id: 'unclustered-point',
         type: 'circle',
-        source: 'earthquakes',
+        source: 'campgrounds',
         filter: ['!', ['has', 'point_count']],
         paint: {
             'circle-color': '#11b4da',
@@ -78,14 +79,13 @@ map.on('load', () => {
             'circle-stroke-color': '#fff'
         }
     });
-
     // inspect a cluster on click
     map.on('click', 'clusters', (e) => {
         const features = map.queryRenderedFeatures(e.point, {
             layers: ['clusters']
         });
         const clusterId = features[0].properties.cluster_id;
-        map.getSource('earthquakes').getClusterExpansionZoom(
+        map.getSource('campgrounds').getClusterExpansionZoom(
             clusterId,
             (err, zoom) => {
                 if (err) return;
@@ -102,11 +102,13 @@ map.on('load', () => {
     // the unclustered-point layer, open a popup at
     // the location of the feature, with
     // description HTML from its properties.
+
+
+
     map.on('click', 'unclustered-point', (e) => {
         const coordinates = e.features[0].geometry.coordinates.slice();
-        const mag = e.features[0].properties.mag;
-        const tsunami =
-            e.features[0].properties.tsunami === 1 ? 'yes' : 'no';
+        const popUpText = e.features[0].properties.popUpText;
+        console.log(e.features[0])
 
         // Ensure that if the map is zoomed out such that
         // multiple copies of the feature are visible, the
@@ -118,9 +120,13 @@ map.on('load', () => {
         new mapboxgl.Popup()
             .setLngLat(coordinates)
             .setHTML(
-                `magnitude: ${mag}<br>Was there a tsunami?: ${tsunami}`
+                popUpText
             )
             .addTo(map);
+
+        // `<a href="/campgrounds/${data.features[0]._id}">${title}<a/>
+        // <br>
+        // ${location}`
     });
 
     map.on('mouseenter', 'clusters', () => {

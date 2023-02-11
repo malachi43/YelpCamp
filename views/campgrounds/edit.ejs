@@ -1,8 +1,8 @@
 <% layout('layout/boilerplate') -%>
 <div class="container my-5">
-  <h1 class="text-center display-4">Edit Campground</h1>
   <div class="row justify-content-center">
-    <div class="col-6">
+    <div class="col-lg-6 shadow-lg rounded p-5">
+      <h1 class="text-center display-5">Edit Campground</h1>
       <form
         action="/campgrounds/<%= campground._id %>?_method=PATCH"
         class="lead validate-form"
@@ -82,17 +82,32 @@
           <div class="valid-feedback">Looks good</div>
           <div class="invalid-feedback">Cannot be null</div>
           <div class="container">
-            <% if(campground) {%> <% campground.images.forEach((img,i)=>{%>
+            <% if(campground) {%> <% campground.images.forEach((img,i)=>{%> <%
+            if(img.thumbnail) {%>
             <img
-              src="<%= img.thumbnail%>"
+              src="<%= img.thumbnail %>"
               class="img-fluid my-2 bg-dark rounded border-danger border-3 border img-thumbnail my-3"
               alt=""
             />
+            <% }else{ %>
+            <img
+              src="https://images.unsplash.com/photo-1559521783-1d1599583485?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=200&q=80"
+              alt=""
+            />
+            <% } %>
             <div class="form-check form-switch">
-              <input class="form-check-input" type="checkbox" name="deleteImages[]" id="image-<%=i%>" value="<%= img.filename%>" />
-              <label class="form-check-label" for="image-<%=i%>">Delete?</label>
+              <input
+                class="form-check-input"
+                type="checkbox"
+                name="deleteImages[]"
+                id="image-<%=i%>"
+                value="<%= img.filename %>"
+              />
+              <label class="form-check-label" for="image-<%=i%>"
+                >Delete image?</label
+              >
             </div>
-        
+
             <% }) %> <% }%>
           </div>
         </div>
@@ -106,5 +121,3 @@
     </div>
   </div>
 </div>
-
-

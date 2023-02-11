@@ -17,32 +17,33 @@ const multer = require('multer')
 const { storage } = require('../cloudinaryConfig')
 const upload = multer({ storage })
 const Campground = require('../models/Campground')
+const { isDemoUser, getCurrentUrl } = require('../middlewares/isDemoUser')
 
 router.route('/')
     .get(getAllCampgrounds)
-    .post(isLoggedIn, upload.array('image'), validateCampground, createCampground)
+    .post(getCurrentUrl, isDemoUser, isLoggedIn, upload.array('image'), validateCampground, createCampground)
 
 
-    router.get('/images', async (req,res)=>{
-        const campgrounds = await Campground.find({})
-        const {images} = campgrounds[0]
-        console.log('images: ', images)
-        res.render('campgrounds/images',{campgrounds})
-    })
+router.get('/images', async (req, res) => {
+    const campgrounds = await Campground.find({})
+    const { images } = campgrounds[0]
+    console.log('images: ', images)
+    res.render('campgrounds/images', { campgrounds })
+})
 
-    router.delete('/image/:id', (req,res)=>{
-        const {id} = req.params
-        console.log(id)
-        res.send(`Image about to be deleted...`)
-    })
+router.delete('/image/:id', (req, res) => {
+    const { id } = req.params
+    console.log(id)
+    res.send(`Image about to be deleted...`)
+})
 router.get('/new', isLoggedIn, renderCampgroundNewForm)
 
 router.get('/:id/edit', isLoggedIn, isOwner, renderCampgroundEditForm)
 
 router.route('/:id')
     .get(getSingleCampground)
-    .delete(isLoggedIn, isOwner, deleteCampground)
-    .patch(isLoggedIn, isOwner, upload.array('image'), validateCampground, updateCampground)
+    .delete(getCurrentUrl, isDemoUser, isLoggedIn, isOwner, deleteCampground)
+    .patch(getCurrentUrl, isDemoUser, isLoggedIn, isOwner, upload.array('image'), validateCampground, updateCampground)
 
 
 

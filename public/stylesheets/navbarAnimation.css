@@ -1,0 +1,13 @@
+#options a:hover {
+  transition: font-size 0.5s;
+  font-size: 1.5em;
+}
+
+#personal a:hover {
+  transition: font-size 0.5s;
+  font-size: 1.5em;
+}
+#homeIcon a:hover {
+  transition: font-size 0.5s;
+  font-size: 1.5em;
+}
