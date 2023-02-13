@@ -156,39 +156,71 @@
         </form>
       </div>
       <div class="lead d-none d-md-block">
-        <p class="display-5">Reviews</p>
-        <% if(campground && campground.reviews.length){%> <% for(let review of
-        campground.reviews) { %>
-        <div class="lead m-2 p-3 border fs-6 border-dark shadow">
-          <p class="starability-result mb-1" data-rating="<%= review.rating%>">
-            Rated:<%= review.rating%> stars
-          </p>
-          <p class="lead fst-italic"><%= review.owner.username %></p>
-          <p class="text-wrap text-truncate"><%= review.body %></p>
+        <div
+          class="accordion border-dark border-2 border"
+          id="accordionFlushExample"
+        >
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-headingOne">
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#flush-collapseOne"
+                aria-expanded="false"
+                aria-controls="flush-collapseOne"
+              >
+                <span class="lead">Reviews</span>
+              </button>
+            </h2>
+            <div
+              id="flush-collapseOne"
+              class="accordion-collapse collapse show"
+              aria-labelledby="flush-headingOne"
+              data-bs-parent="#accordionFlushExample"
+            >
+              <div class="accordion-body">
+                <% if(campground && campground.reviews.length){%> <% for(let
+                review of campground.reviews) { %>
 
-          <% if(currentUser && review.owner.id === currentUser.id){%>
-          <form
-            action="/campgrounds/<%= campground._id %>/reviews/<%= review._id %>?_method=DELETE"
-            method="post"
-          >
-            <button class="btn btn-danger btn-sm">Delete review</button>
-          </form>
-          <%}%>
+                <div class="lead m-2 p-3 border fs-6 border-dark shadow">
+                  <p
+                    class="starability-result mb-1"
+                    data-rating="<%= review.rating%>"
+                  >
+                    Rated:<%= review.rating%> stars
+                  </p>
+                  <p class="lead fst-italic"><%= review.owner.username %></p>
+                  <p class="text-wrap text-truncate"><%= review.body %></p>
+
+                  <% if(currentUser && review.owner.id === currentUser.id){%>
+                  <form
+                    action="/campgrounds/<%= campground._id %>/reviews/<%= review._id %>?_method=DELETE"
+                    method="post"
+                  >
+                    <button class="btn btn-danger btn-sm">Delete review</button>
+                  </form>
+
+                  <%}%>
+                </div>
+                <% } %> <% } else{ %>
+                <p class="lead text-center display-5">
+                  No reviews for <%= campground.title%>
+                </p>
+                <% } %> <%}%>
+              </div>
+            </div>
+          </div>
         </div>
-        <% } %> <% } else{%>
-        <p class="lead text-center display-5">
-          No reviews for <%= campground.title%>
-        </p>
-        <% } %> <% } %>
+
+        <script>
+          const campground = <%- JSON.stringify(campground) %>
+          const mapToken = "<%- process.env.MAPBOX_TOKEN %>"
+          const coordinates = "<%- JSON.stringify(campground.geometry.coordinates) %>"
+          const popUpText = "<%- campground.description %>"
+        </script>
+        <script src="/javascripts/renderMap.js"></script>
       </div>
     </div>
   </div>
 </div>
-
-<script>
-  const campground = <%- JSON.stringify(campground) %>
-  const mapToken = "<%- process.env.MAPBOX_TOKEN %>";
-  const coordinates = "<%- JSON.stringify(campground.geometry.coordinates) %>";
-  const popUpText = "<%- campground.description %>";
-</script>
-<script src="/javascripts/renderMap.js"></script>

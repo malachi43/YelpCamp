@@ -4,6 +4,7 @@ const cities = require('./cities');
 const { descriptors, places } = require('./seedHelpers');
 const User = require('../models/user')
 
+const userArray = ['63e16a5886497f3d881e633b',"63decae2b464053fc8881b0e","63dec1041af9841e48ceecd1"]
 const images = [{
   path: 'https://res.cloudinary.com/dxsnvhloa/image/upload/v1675644791/YelpCamp/mocw4fnthup9rt5ilxpo.jpg',
   filename: 'YelpCamp/mocw4fnthup9rt5ilxpo'
@@ -30,7 +31,7 @@ const randomValue = (array) => array[Math.floor(Math.random() * array.length)];
 
   for (let i = 0; i < 50; ++i) {
     const camp = await new Campground({
-      owner: `63dec1041af9841e48ceecd1`,
+      owner: randomValue(userArray),
       location: `${randomValue(cities).city},${randomValue(cities).state}`,
       title: `${randomValue(descriptors)} ${randomValue(places)}`, price, description: `Lorem ipsum dolor sit, amet consectetur adipisicing elit. Non fugit odit velit repellendus odio iste, omnis ipsum tempora natus distinctio expedita corporis, delectus sint! Dolorum distinctio ipsam asperiores vero, nam fugiat cupiditate, nulla quasi possimus nostrum quaerat temporibus. Excepturi rerum amet ut similique illo sint harum suscipit aliquid soluta! Rem?
 `,

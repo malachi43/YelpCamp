@@ -1,7 +1,7 @@
 <% layout('layout/boilerplate') -%>
 <p class="text-center lead display-5 my-1">Campground cluster map</p>
 <div id="map" class="my-3"></div>
-<div class="">
+<div>
   <div class="row">
     <div class="col-8 mx-auto my-auto">
       <form action="/campgrounds" class="lead" method="get">
@@ -18,16 +18,16 @@
             aria-describedby="basic-addon1"
           />
           <button class="btn btn-dark text-light">Search</button>
-        </form>
+        </div>
+      </form>
     </div>
   </div>
 </div>
 <div
-  class="container my-5 border  shadow-lg p-3 justify-content-center border-dark"
+  class="container my-5 border shadow-lg p-3 justify-content-center border-dark"
 >
-
   <% if(campgrounds.length) {%>
-<div class="text-center display-5">
+  <div class="text-center display-5">
     <i class="bi bi-house-door"></i>
     <h1 class="display-3">All Campgrounds</h1>
     <a href="/campgrounds/new" class="text-decoration-none">Add campground</a>
@@ -36,11 +36,15 @@
   <ul class="lead text-muted">
     <% if(campgrounds) {%> <%for(let campground of campgrounds){%>
     <div class="container">
-      <div class="row my-3 ">
+      <div class="row my-3">
         <div class="col-md-10 mx-auto">
           <div class="card shadow-lg">
             <div class="card-body">
-              <img src="<%= campground.images[0].path%>" class="img-fluid rounded shadow m-2" alt="">
+              <img
+                src="<%= campground.images[0].path%>"
+                class="img-fluid d-none d-sm-none d-md-block rounded shadow m-2"
+                alt=""
+              />
               <h5 class="card-title m-2"><%= campground.title %></h5>
               <h6 class="card-subtitle mb-2 text-muted m-2">
                 <%= campground.location %>
@@ -53,21 +57,46 @@
               </a>
             </div>
           </div>
-
-          
         </div>
       </div>
     </div>
+
     <%}%> <% } %> <% } else{%>
     <p class="lead text-center">🙁</p>
     <p class="lead text-center display-5">
       Sorry, we couldn't find any results
     </p>
     <% } %>
+
+    <script>
+      const mapToken = "<%- process.env.MAPBOX_TOKEN %>";
+      const data = { "features": <%- JSON.stringify(campgrounds) %> }
+    </script>
+    <script src="/javascripts/clusterMap.js"></script>
+    <!-- <script src="/javascripts/pagination.js"></script> -->
   </ul>
+
+  <div id="pagination" class="lead text-center m-2">
+    <% if(numberOfPages) {%>
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <nav aria-label="Page navigation example">
+            <ul class="pagination">
+              <% for(let i = 0; i < numberOfPages; i++) {%>
+              <li class="page-item m-2">
+                <a
+                  class="page-link border text-dark border-dark lead fw-bold"
+                  href="/campgrounds?page=<%= i + 1 %>"
+                  ><%= i + 1 %>
+                </a>
+              </li>
+              <% } %>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+    <% } %>
+  </div>
 </div>
-<script>
-  const mapToken = "<%- process.env.MAPBOX_TOKEN %>";
-  const data = { "features": <%- JSON.stringify(campgrounds) %> }
-</script>
-<script src="/javascripts/clusterMap.js"></script>

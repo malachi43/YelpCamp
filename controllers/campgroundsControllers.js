@@ -3,20 +3,32 @@ const CustomError = require('../errors');
 const { cloudinary } = require('../cloudinaryConfig')
 const mapboxGeoCoding = require('@mapbox/mapbox-sdk/services/geocoding')
 const mbxGeo = mapboxGeoCoding({ accessToken: process.env.MAPBOX_TOKEN })
+
 module.exports.getAllCampgrounds = async (req, res) => {
     const queryObject = {}
     if (req.query.q) {
         queryObject.title = { $regex: req.query.q, $options: 'i' }
     }
-    const campgrounds = await Campground.find(queryObject)
-    res.render('campgrounds/index', { campgrounds });
+
+    const campgrounds = Campground.find(queryObject)
+
+
+    const page = parseInt(req.query.page) || 1
+    const limit = parseInt(req.query.limit) || 5
+    const skip = (page - 1) * limit
+
+    const numberOfPages = Math.ceil(await Campground.countDocuments() / limit)
+    console.log(`numberOfPages`, numberOfPages)
+    res.locals.numberOfPages = numberOfPages
+    const campgroundResults = await campgrounds.skip(skip).limit(limit)
+    res.render('campgrounds/index', { campgrounds: campgroundResults });
 }
 
 module.exports.updateCampground = async (req, res) => {
 
     const campground = await Campground.findByIdAndUpdate(req.params.id, { ...req.body.campground }, { runValidators: true, new: true })
 
-    
+
     if (req.files) {
         const images = req.files.map(file => ({ path: file.path, filename: file.filename }))
         campground.images.push(...images)
@@ -88,6 +100,3 @@ module.exports.deleteCampground = async (req, res) => {
     req.flash('success', 'successfully deleted campground')
     res.redirect('/campgrounds')
 }
-
-
-

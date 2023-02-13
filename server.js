@@ -28,7 +28,7 @@ const aWeek = 1000 * 60 * 60 * 24 * 7
 const dbUrl = `mongodb://127.0.0.1:27017/YelpCamp`
 
 const sessionConfig = {
-    secret: 'thisisasecret',
+    secret:process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
     cookie: {
