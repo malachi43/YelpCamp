@@ -34,10 +34,11 @@
   </div>
 
   <ul class="lead text-muted">
-    <% if(campgrounds) {%> <%for(let campground of campgrounds){%>
     <div class="container">
       <div class="row my-3">
-        <div class="col-md-10 mx-auto">
+        <% if(campgrounds) {%> <%for(let campground of campgrounds){%>
+
+        <div class="col-md-6 mx-auto my-3">
           <div class="card shadow-lg">
             <div class="card-body">
               <img
@@ -58,29 +59,19 @@
             </div>
           </div>
         </div>
+
+        <%}%> <% } %>
       </div>
     </div>
-
-    <%}%> <% } %> <% } else{%>
+    <% } else{%>
     <p class="lead text-center">🙁</p>
     <p class="lead text-center display-5">
       Sorry, we couldn't find any results
     </p>
-    <% } %>
-
-    <script>
-      const mapToken = "<%- process.env.MAPBOX_TOKEN %>";
-      const data = { "features": <%- JSON.stringify(campgrounds) %> }
-    </script>
-    <script src="/javascripts/clusterMap.js"></script>
-    <!-- <script src="/javascripts/pagination.js"></script> -->
-  </ul>
-
-  <div id="pagination" class="lead text-center m-2">
-    <% if(numberOfPages) {%>
+    <% } %> <% if(numberOfPages) {%>
     <div class="container">
-      <div class="row">
-        <div class="col">
+      <div class="row justify-content-center align-items-center">
+        <div class="col-6">
           <nav aria-label="Page navigation example">
             <ul class="pagination">
               <% for(let i = 0; i < numberOfPages; i++) {%>
@@ -98,5 +89,12 @@
       </div>
     </div>
     <% } %>
-  </div>
+
+    <script>
+      const mapToken = "<%- process.env.MAPBOX_TOKEN %>";
+      const data = { "features": <%- JSON.stringify(campgrounds) %> }
+    </script>
+    <script src="/javascripts/clusterMap.js"></script>
+    <!-- <script src="/javascripts/pagination.js"></script> -->
+  </ul>
 </div>
