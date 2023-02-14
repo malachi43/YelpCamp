@@ -191,7 +191,7 @@
                     Rated:<%= review.rating%> stars
                   </p>
                   <p class="lead fst-italic"><%= review.owner.username %></p>
-                  <p class="text-wrap text-truncate"><%= review.body %></p>
+                  <p class="text-wrap"><%= review.body %></p>
 
                   <% if(currentUser && review.owner.id === currentUser.id){%>
                   <form

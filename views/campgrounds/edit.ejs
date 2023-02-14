@@ -82,38 +82,43 @@
           <div class="valid-feedback">Looks good</div>
           <div class="invalid-feedback">Cannot be null</div>
           <div class="container">
-            <% if(campground) {%> <% campground.images.forEach((img,i)=>{%> <%
-            if(img.thumbnail) {%>
-            <img
-              src="<%= img.thumbnail %>"
-              class="img-fluid my-2 bg-dark rounded border-danger border-3 border img-thumbnail my-3"
-              alt=""
-            />
-            <% }else{ %>
-            <img
-              src="https://images.unsplash.com/photo-1559521783-1d1599583485?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=200&q=80"
-              alt=""
-            />
-            <% } %>
-            <div class="form-check form-switch">
-              <input
-                class="form-check-input"
-                type="checkbox"
-                name="deleteImages[]"
-                id="image-<%=i%>"
-                value="<%= img.filename %>"
-              />
-              <label class="form-check-label" for="image-<%=i%>"
-                >Delete image?</label
-              >
-            </div>
+            <div class="row">
+              <% if(campground) {%> <% campground.images.forEach((img,i)=>{%> <%
+              if(img.thumbnail) {%>
+              <div class="col">
+                <img
+                  src="<%= img.thumbnail %>"
+                  class="img-fluid my-2 bg-dark rounded border-danger border-3 border img-thumbnail my-3"
+                  alt=""
+                />
+                <% }else{ %>
+                <img
+                  src="https://images.unsplash.com/photo-1559521783-1d1599583485?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=200&q=80"
+                  alt=""
+                  class="img-fluid"
+                />
+                <% } %>
+                <div class="form-check form-switch">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    name="deleteImages[]"
+                    id="image-<%=i%>"
+                    value="<%= img.filename %>"
+                  />
+                  <label class="form-check-label" for="image-<%=i%>"
+                    >Delete image?</label
+                  >
+                </div>
 
-            <% }) %> <% }%>
+                <% }) %> <% }%>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="mb-3">
-          <button class="btn btn-info me-3">Update Campground</button>
-          <a href="/campgrounds/<%= campground._id %> " class="btn btn-primary"
+        <div class="w-50 align-items-center ms-5 mt-3">
+          <button class="btn btn-info me-3 mx-auto my-auto">Update Campground</button>
+          <a href="/campgrounds/<%= campground._id %> " class="btn my-3 btn-primary"
             >Cancel</a
           >
         </div>

@@ -25,12 +25,6 @@ module.exports.getAllCampgrounds = async (req, res) => {
         res.locals.grid = 'col-md-6'
     }
 
-
-    // else {
-    //     res.locals.view = "grid"
-    //     res.locals.grid = 'col-md-6'
-    // }
-
     if (req.query.q) {
         queryObject.title = { $regex: req.query.q, $options: 'i' }
     }
@@ -88,7 +82,13 @@ module.exports.createCampground = async (req, res) => {
         query: req.body.campground.location,
         limit: 1
     }).send()
-
+    console.log(`before logging features`)
+    console.log(features.length)
+    console.log(`after logging features`)
+    if (features.length === 0) {
+        req.flash('error', `Error reading ${req.body.campground.location} location`)
+        return res.redirect('/campgrounds/new')
+    }
     const geometry = features[0].geometry
 
     const images = req.files.map(file => {

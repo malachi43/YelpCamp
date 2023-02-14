@@ -82,7 +82,15 @@
           <div class="invalid-feedback">A brief description is needed</div>
         </div>
         <div class="mb-3">
-          <button class="btn btn-success me-3">Add campground</button>
+          <button id="add-campground" class="btn btn-success me-3">
+            <span
+              class="spinner-border-sm"
+              role="status"
+              aria-hidden="true"
+            ></span>
+            <span class="visually-hidden">Loading...</span>
+            Add campground
+          </button>
           <a href="/campgrounds" class="btn btn-primary">Cancel</a>
         </div>
       </form>
