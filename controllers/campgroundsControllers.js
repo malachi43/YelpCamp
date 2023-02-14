@@ -82,9 +82,7 @@ module.exports.createCampground = async (req, res) => {
         query: req.body.campground.location,
         limit: 1
     }).send()
-    console.log(`before logging features`)
-    console.log(features.length)
-    console.log(`after logging features`)
+
     if (features.length === 0) {
         req.flash('error', `Error reading ${req.body.campground.location} location`)
         return res.redirect('/campgrounds/new')
@@ -92,7 +90,6 @@ module.exports.createCampground = async (req, res) => {
     const geometry = features[0].geometry
 
     const images = req.files.map(file => {
-        console.log(file.path)
         return {
             path: file.path,
             filename: file.filename
