@@ -8,22 +8,22 @@ module.exports.getAllCampgrounds = async (req, res) => {
 
     const queryObject = {}
     //check if req.query object has a property
-    if (!req.query.view) {
-        res.locals.view = 'grid'
-        res.locals.grid = 'col-md-6'
-    }
+    // if (!req.query.view) {
+    //     res.locals.view = 'grid'
+    //     res.locals.grid = 'col-md-6'
+    // }
 
-    //check if req.query object has a property equal to list
-    if (req.query.view && req.query.view === 'list') {
-        res.locals.view = 'list'
-        res.locals.list = 'col-12'
-    }
+    // //check if req.query object has a property equal to list
+    // if (req.query.view && req.query.view === 'list') {
+    //     res.locals.view = 'list'
+    //     res.locals.list = 'col-12'
+    // }
 
-    //check if req.query object has a property equal to grid
-    if (req.query.view && req.query.view === 'grid') {
-        res.locals.view = 'grid'
-        res.locals.grid = 'col-md-6'
-    }
+    // //check if req.query object has a property equal to grid
+    // if (req.query.view && req.query.view === 'grid') {
+    //     res.locals.view = 'grid'
+    //     res.locals.grid = 'col-md-6'
+    // }
 
     if (req.query.q) {
         queryObject.title = { $regex: req.query.q, $options: 'i' }

@@ -3,15 +3,15 @@
 <div id="map" class="my-3"></div>
 <div>
   <div class="row">
-    <div class="col-8 mx-auto my-auto">
-      <form action="/campgrounds" class="lead" method="get">
+    <div class="col-md-8 mx-auto my-auto">
+      <form action="/campgrounds" class="lead container-fluid" method="get">
         <div class="input-group border-dark mx-auto mb-3">
           <span class="input-group-text" id="basic-addon1"
             ><i class="bi bi-search text-dark"></i
           ></span>
           <input
             type="search"
-            class="form-control lead border-dark"
+            class="form-control container-fluid lead border-dark"
             placeholder="Search campgrounds"
             aria-label="search"
             name="q"
@@ -24,15 +24,15 @@
   </div>
 </div>
 <div
-  class="container my-5 border shadow-lg p-3 justify-content-center border-dark"
+  class="container-md my-5 border shadow-lg p-3 justify-content-center border-dark"
 >
-  <span class="d-block lead">Preferred layout</span>
-  <a href="/campgrounds/?view=grid" title="grid">
+  <!-- <span class="d-block lead">Preferred layout</span> -->
+  <!-- <a href="/campgrounds/?view=grid" title="grid">
     <i class="bi bi-grid fs-1 m-1 text-dark"></i
   ></a>
   <a href="/campgrounds/?view=list" title="list"
     ><i class="bi bi-list-task fs-1 m-1 text-dark"></i
-  ></a>
+  ></a> -->
 
   <% if(campgrounds.length) {%>
   <div class="text-center display-5">
@@ -43,10 +43,10 @@
   </div>
 
   <ul class="lead text-muted">
-    <div class="container">
+    <div class="container-fluid">
       <div class="row my-3">
         <% if(campgrounds) {%> <%for(let campground of campgrounds){%>
-        <div class="<%= view === 'grid' ? grid : list %> mx-auto my-3">
+        <div class="col-md-6 mx-auto my-3">
           <div class="card shadow-lg">
             <div class="card-body">
               <img
@@ -79,9 +79,9 @@
     <% } %> <% if(campgrounds.length) {%> <% if(numberOfPages) {%>
     <div class="container">
       <div class="row justify-content-center align-items-center">
-        <div class="col-4 col-md-6">
+        <div class="col-md-6">
           <nav aria-label="Page navigation example">
-            <ul class="pagination">
+            <ul class="pagination mx-auto">
               <% for(let i = 0; i < numberOfPages; i++) {%>
               <li class="page-item m-2">
                 <a

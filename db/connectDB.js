@@ -3,7 +3,7 @@ const connectionString = process.env.MONGO_URL
 
 
 const connectDB = async () => {
-    return mongoose.connect(connectionString, {
+    return mongoose.connect(`mongodb://127.0.0.1:27017/YelpCamp`, {
         useCreateIndex: true,
         useFindAndModify: false,
         useNewUrlParser: true,

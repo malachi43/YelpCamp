@@ -26,7 +26,7 @@ const { join } = require('path');
 const mongoSanitize = require('express-mongo-sanitize')
 const aWeek = 1000 * 60 * 60 * 24 * 7
 //local mongo database
-// const dbUrl = `mongodb://127.0.0.1:27017/YelpCamp`
+const dbUrl = `mongodb://127.0.0.1:27017/YelpCamp`
 
 const sessionConfig = {
     secret: process.env.SESSION_SECRET,
@@ -39,7 +39,7 @@ const sessionConfig = {
         maxAge: aWeek
     },
     store: MongoStore.create({
-        mongoUrl: process.env.MONGO_URL,
+        mongoUrl: dbUrl, //process.env.MONGO_URL,
         touchAfter: 24 * 3600// time period in seconds,
     })
 }
@@ -84,7 +84,7 @@ app.get('/', (req, res) => {
 
 app.get('/yelpcamp/demo-user', async (req, res) => {
     //check if demoUser exists
-    const foundUser = await User.findOne({ username: process.env.DEMO_USER })
+    const foundUser = await User.findOne({ username: process.env.DEMO_USERNAME })
     if (foundUser) {
         req.login(foundUser, function (err) {
             if (err) throw new Error(`Error establishing session`)
@@ -95,7 +95,7 @@ app.get('/yelpcamp/demo-user', async (req, res) => {
     }
 
     //create a DemoUser 
-    const user = await new User({ username: process.env.DEMO_USER, email: process.env.DEMO_USER_EMAIL })
+    const user = await new User({ username: process.env.DEMO_USERNAME, email: process.env.DEMO_USER_EMAIL })
     const demoUser = await User.register(user, process.env.DEMO_PASSWORD)
     req.login(demoUser, function (err) {
         if (err) throw new Error(`Error establishing session`)
