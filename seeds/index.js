@@ -26,7 +26,7 @@ const price = Math.floor(Math.random() * 100) + 10
 const randomValue = (array) => array[Math.floor(Math.random() * array.length)];
 
 (async () => {
-  await connectDB();
+  await connectDB(process.env.MONGO_URL);
   await Campground.deleteMany({});
 
   for (let i = 0; i < 50; ++i) {

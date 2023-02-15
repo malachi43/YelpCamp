@@ -126,27 +126,8 @@ app.use(errorHandler)
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 async function startApp() {
-    await connectDB();
+    await connectDB(process.env.MONGO_URL);
     console.log(`CONNECTED TO DATABASE`)
     app.listen(PORT, () => console.log(`SERVER LISTENING ON PORT ${PORT}`));
 }
