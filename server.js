@@ -25,6 +25,7 @@ const ejsMate = require('ejs-mate')
 const { join } = require('path');
 const mongoSanitize = require('express-mongo-sanitize')
 const aWeek = 1000 * 60 * 60 * 24 * 7
+//local mongo database
 const dbUrl = `mongodb://127.0.0.1:27017/YelpCamp`
 
 const sessionConfig = {
@@ -38,7 +39,7 @@ const sessionConfig = {
         maxAge: aWeek
     },
     store: MongoStore.create({
-        mongoUrl: dbUrl,
+        mongoUrl: process.env.MONGO_URL,
         touchAfter: 24 * 3600// time period in seconds,
     })
 }

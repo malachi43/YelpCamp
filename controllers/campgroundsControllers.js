@@ -39,6 +39,7 @@ module.exports.getAllCampgrounds = async (req, res) => {
     const numberOfPages = Math.ceil(await Campground.countDocuments() / limit)
     res.locals.numberOfPages = numberOfPages
     const campgroundResults = await campgrounds.skip(skip).limit(limit)
+    // res.redirect(req.query.view ? req.originalUrl : '/campgrounds')
     res.render('campgrounds/index', { campgrounds: campgroundResults });
 }
 
