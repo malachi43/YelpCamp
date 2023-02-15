@@ -1,5 +1,5 @@
 const { BadRequest } = require('./BadRequest')
-const { NotFound } = require('./NotFound')
+const { NotFound } = require('./notFound')
 const { Unauthorized } = require('./Unauthorized')
 
 

@@ -26,7 +26,7 @@ const { join } = require('path');
 const mongoSanitize = require('express-mongo-sanitize')
 const aWeek = 1000 * 60 * 60 * 24 * 7
 //local mongo database
-const dbUrl = `mongodb://127.0.0.1:27017/YelpCamp`
+// const dbUrl = `mongodb://127.0.0.1:27017/YelpCamp`
 
 const sessionConfig = {
     secret: process.env.SESSION_SECRET,
