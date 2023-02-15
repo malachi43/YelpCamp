@@ -29,7 +29,7 @@ const aWeek = 1000 * 60 * 60 * 24 * 7
 const dbUrl = `mongodb://127.0.0.1:27017/YelpCamp`
 
 const sessionConfig = {
-    secret:process.env.SESSION_SECRET,
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
     cookie: {
@@ -84,7 +84,7 @@ app.get('/', (req, res) => {
 
 app.get('/yelpcamp/demo-user', async (req, res) => {
     //check if demoUser exists
-    const foundUser = await User.findOne({ username: 'DemoUser' })
+    const foundUser = await User.findOne({ username: process.env.DEMO_USER })
     if (foundUser) {
         req.login(foundUser, function (err) {
             if (err) throw new Error(`Error establishing session`)
@@ -95,7 +95,7 @@ app.get('/yelpcamp/demo-user', async (req, res) => {
     }
 
     //create a DemoUser 
-    const user = await new User({ username: 'DemoUser', email: 'demouser@gmail.com' })
+    const user = await new User({ username: process.env.DEMO_USER, email: process.env.DEMO_USER_EMAIL })
     const demoUser = await User.register(user, process.env.DEMO_PASSWORD)
     req.login(demoUser, function (err) {
         if (err) throw new Error(`Error establishing session`)
@@ -113,7 +113,7 @@ app.use(notFound)
 app.use(errorHandler)
 
 
-//For Handling async errors in express.
+//For Handling async errors in express. NOTE: I used the express-async-errors module in place of the async wrapper
 // function asyncErrorWrapper(fns) {
 //     return async (req, res, next) => {
 //         try {
