@@ -4,7 +4,7 @@ const cities = require('./cities');
 const { descriptors, places } = require('./seedHelpers');
 const User = require('../models/user')
 
-const userArray = ['63e16a5886497f3d881e633b', "63decae2b464053fc8881b0e", "63dec1041af9841e48ceecd1"]
+const userArray = ["63ed2bbeb5ea940035a59cad","63ed2ec1325bfc2ee059d2a8","63ed2ee7325bfc2ee059d2b2"]
 const images = [{
   path: 'https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8Y2FtcGdyb3VuZHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=300&q=60',
   filename: 'YelpCamp/mocw4fnthup9rt5ilxpo'
