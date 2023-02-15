@@ -26,7 +26,7 @@ const { join } = require('path');
 const mongoSanitize = require('express-mongo-sanitize')
 const aWeek = 1000 * 60 * 60 * 24 * 7
 //local mongo database
-const dbUrl = `mongodb://127.0.0.1:27017/YelpCamp`
+// const dbUrl = `mongodb://127.0.0.1:27017/YelpCamp`
 
 const sessionConfig = {
     secret: process.env.SESSION_SECRET,
@@ -39,7 +39,7 @@ const sessionConfig = {
         maxAge: aWeek
     },
     store: MongoStore.create({
-        mongoUrl: dbUrl, //process.env.MONGO_URL,
+        mongoUrl: process.env.MONGO_URL, //process.env.MONGO_URL,
         touchAfter: 24 * 3600// time period in seconds,
     })
 }

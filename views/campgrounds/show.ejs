@@ -67,7 +67,9 @@
 
         <% } %>
 
-        <div class="card-footer my-2 text-muted">2 days ago</div>
+        <div class="card-footer my-2 text-muted">
+         Created: <%= campground.createdOn%>
+        </div>
       </div>
     </div>
     <% if(currentUser) {%>

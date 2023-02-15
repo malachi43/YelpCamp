@@ -36,15 +36,19 @@
             <li class="nav-item">
               <a class="nav-link lead text-dark" href="/campgrounds">Campgrounds</a>
             </li>
+            <% if(!currentUser) {%>
             <li class="nav-item">
               <a class="nav-link lead text-dark" href="/auth/login">Login</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link lead text-dark" href="/auth/login">Logout</a>
-            </li>
-            <li class="nav-item">
               <a class="nav-link lead text-dark" href="/auth/register">Register</a>
             </li>
+            <%} else {%>
+
+            <li class="nav-item">
+              <a class="nav-link lead text-dark" href="/auth/login">Logout</a>
+            </li>
+            <%}%>
           </ul>
         </div>
       </div>

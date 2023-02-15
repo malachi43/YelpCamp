@@ -52,6 +52,10 @@ const campgroundSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'User'
     },
+    createdOn: {
+        type: Date,
+        default: Date.now()
+    },
     geometry: {
         type: {
             type: String,

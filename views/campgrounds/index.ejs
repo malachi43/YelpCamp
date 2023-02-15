@@ -24,7 +24,7 @@
   </div>
 </div>
 <div
-  class="container-md my-5 border shadow-lg p-3 justify-content-center border-dark"
+  class="container-md my-5 border shadow-lg p-3 justify-content-center align-items-center border-dark"
 >
   <!-- <span class="d-block lead">Preferred layout</span> -->
   <!-- <a href="/campgrounds/?view=grid" title="grid">
@@ -76,32 +76,38 @@
     <p class="lead text-center display-5">
       Sorry, we couldn't find any results
     </p>
-    <% } %> <% if(campgrounds.length) {%> <% if(numberOfPages) {%>
-    <div class="container">
-      <div class="row justify-content-center align-items-center">
-        <div class="col-md-6">
-          <nav aria-label="Page navigation example">
-            <ul class="pagination mx-auto">
-              <% for(let i = 0; i < numberOfPages; i++) {%>
-              <li class="page-item m-2">
-                <a
-                  class="page-link border text-dark border-dark lead fw-bold"
-                  href="/campgrounds?page=<%= i + 1 %>"
-                  ><%= i + 1 %>
-                </a>
-              </li>
-              <% } %>
-            </ul>
-          </nav>
-        </div>
-      </div>
-    </div>
-    <% } %> <% } %>
-    <script>
-      const mapToken = "<%- process.env.MAPBOX_TOKEN %>";
-      const data = { "features": <%- JSON.stringify(campgrounds) %> }
-    </script>
-    <script src="/javascripts/clusterMap.js"></script>
-    <!-- <script src="/javascripts/pagination.js"></script> -->
+  
+   
   </ul>
+  
 </div>
+<div class="container">
+  <div class="row">
+    <% } %> <% if(campgrounds.length) {%> <% if(numberOfPages) {%>
+
+    <div class="col-md-12">
+      <nav aria-label="Page navigation example">
+        <ul class="pagination">
+          <% for(let i = 0; i < numberOfPages; i++) {%>
+          <li class="page-item">
+            <a
+              class="page-link border text-dark border-dark"
+              href="/campgrounds?page=<%= i + 1 %>"
+              ><%= i + 1 %>
+            </a>
+          </li>
+          <% } %>
+        </ul>
+      </nav>
+    </div>
+
+    <% } %> <% } %>
+  </div>
+</div>
+
+<script>
+  const mapToken = "<%- process.env.MAPBOX_TOKEN %>";
+  const data = { "features": <%- JSON.stringify(campgrounds) %> }
+</script>
+<script src="/javascripts/clusterMap.js"></script>
+<!-- <script src="/javascripts/pagination.js"></script> -->
