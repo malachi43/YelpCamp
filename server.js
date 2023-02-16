@@ -59,6 +59,7 @@ app.use(express.json())
 app.use(mongoSanitize())
 app.use(methodOverride('_method'))
 app.use(express.static(join(__dirname, 'public')))
+app.set("trust proxy", 1);
 app.use(session(sessionConfig))
 app.use(flash())
 app.use(passport.initialize())
