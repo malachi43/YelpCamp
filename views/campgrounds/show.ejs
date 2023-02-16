@@ -69,18 +69,18 @@
       </div>
     </div>
     <% if(currentUser) {%>
-    <div class="col-6 mx-auto">
-      <div class="m-3 d-none d-md-block">
+    <div class="col-md-6 mx-auto">
+      <div class="m-3">
         <p class="lead">
           <i class="bi bi-geo-fill"></i><%= campground.location %>
         </p>
         <div
           id="map"
           style="width: 100%; height: 300px"
-          class="my-3 rounded mx-auto d-none d-md-block"
+          class="my-3 rounded mx-auto"
         ></div>
       </div>
-      <div class="m-3 d-none d-md-block mt-0">
+      <div class="m-3 mt-0">
         <p class="lead">Leave a Review</p>
         <form
           action="/campgrounds/<%= campground._id %>/reviews"
@@ -153,7 +153,7 @@
           <button class="btn btn-success mt-3">Submit</button>
         </form>
       </div>
-      <div class="lead d-none d-md-block">
+      <div class="lead">
         <div
           class="accordion border-dark border-2 border"
           id="accordionFlushExample"
